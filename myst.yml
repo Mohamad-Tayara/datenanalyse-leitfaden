@@ -1,0 +1,25 @@
+# See docs at: https://mystmd.org/guide/frontmatter
+version: 1
+project:
+  id: d26266b4-7f00-4188-b347-ade8971f2562
+  title: Datenanalyse-Leitfaden 2026
+  description: Ein strukturierter Leitfaden für Data-Science-Projekte im Team, inklusive Code-Beispielen und mathematischen Grundlagen.
+  keywords: [python, data science, jupyter book, pandas, numpy]
+  authors:
+    - name: Max Mustermann
+      email: max.mustermann@example.com
+      corresponding: true
+  github: https://github.com/dein-benutzername/dein-projekt-repo
+  execute:
+    method: cache
+    # "cache" statt "off" spart viel Zeit, da Notebooks beim Builden nicht jedes Mal neu berechnet werden müssen, wenn sie sich nicht geändert haben.
+  toc:
+    - file: ersteseite.ipynb
+    - file: zweiteseite.ipynb
+    - file: driteseite.ipynb
+
+site:
+  template: book-theme
+  options:
+    #logo: site_logo.png
+    # Wenn du ein Logo hast, lege es in den gleichen Ordner wie diese Datei und entferne das '#'
