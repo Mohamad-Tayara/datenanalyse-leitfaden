@@ -1,12 +1,10 @@
 name: deploy-book
 
-# Der Workflow startet automatisch bei jedem Push auf den Main-Branch
 on:
   push:
     branches:
       - main
 
-# Erforderliche Berechtigungen, um die Website auf GitHub Pages zu schreiben
 permissions:
   contents: write
 
@@ -14,29 +12,26 @@ jobs:
   deploy-book:
     runs-on: ubuntu-latest
     steps:
-      # 1. Code aus dem Repository auschecken
       - name: Checkout
         uses: actions/checkout@v4
 
-      # 2. Python-Umgebung auf dem GitHub-Server einrichten
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.10'
 
-      # 3. Alle Abhängigkeiten aus deiner requirements.txt installieren
       - name: Install dependencies
         run: |
           pip install -r requirements.txt
 
-      # 4. Das Jupyter Book vollautomatisch bauen
+      # KORREKTUR 1: 'python -m mystmd' statt nur 'myst' verwenden
       - name: Build the book
         run: |
-          myst build
+          python -m mystmd build
 
-      # 5. Den fertigen HTML-Ordner auf den GitHub-Pages-Branch (gh-pages) pushen
+      # KORREKTUR 2: Pfad leicht korrigiert (falls die HTML-Ausgabe direkt in _build/html landet)
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./book1/_build/html # Pfad zu deinem fertigen HTML-Build
+          publish_dir: ./book1/_build/html
